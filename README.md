@@ -1,36 +1,65 @@
-# Clustering com Preservação de Privacidade: Dados de RH
+# Privacy-Preserving HR Analytics — Clustering
 
-> Proteger dados sensíveis de colaboradores (anonimização, pseudonimização, codificação) e mostrar que o clustering continua a dar os mesmos perfis.
+A data analytics project exploring how privacy transformations affect the usefulness of employee data for unsupervised segmentation.
 
-**Mestrado em Business Intelligence & Analytics (ISCAP)**, 2025/26
+**Academic context:** MSc in Business Intelligence & Analytics, ISCAP (2025/26)  
+**Authors:** Débora Jesus and João Coelho
 
-## O problema
-É possível proteger os dados de saídas de colaboradores, como avaliações, motivos de saída e entrevistas, **sem perder a utilidade analítica**?
+## Project objective
 
-## Abordagem
-1. Dataset **sintético** de 10.000 colaboradores, gerado no próprio notebook. Não tem dados reais.
-2. Dicionário de dados com **classificação de sensibilidade** de cada variável.
-3. Clustering (K-Means) na base de dados **original**.
-4. Base de dados **protegida**: anonimização, pseudonimização (hash) e codificação.
-5. Clustering na base de dados **protegida**.
-6. Desanonimização interpretativa através de tabelas de mapeamento com acesso restrito.
-7. Comparação dos dois resultados com o **Adjusted Rand Index (ARI)**.
+Can employee-related data be transformed to reduce exposure of sensitive information while retaining useful structure for analytical segmentation?
 
-## Resultados
-O ARI entre os clusters da base original e os da protegida foi **elevado**, por isso os perfis mantiveram-se depois da proteção:
-- **Progressão de carreira**: mais jovens, menor antiguidade, avaliação boa.
-- **Underperformance**: avaliação mais baixa e entrevistas de saída negativas.
-- **Reforma**: mais velhos, maior antiguidade.
+The project uses a **synthetic dataset of 10,000 employee records** generated for the notebook. It does not contain real employee records.
 
-## Stack
-`pandas` · `scikit-learn` (K-Means, ARI) · `hashlib` · `matplotlib`
+## Methodology
 
-## Estrutura
+1. Generate and document the synthetic dataset.
+2. Classify variables according to their sensitivity.
+3. Apply K-Means clustering to the original dataset.
+4. Create a protected version using anonymisation, pseudonymisation (hashing), and encoding.
+5. Apply K-Means to the transformed dataset.
+6. Compare the two cluster assignments using the **Adjusted Rand Index (ARI)**.
+7. Use controlled mapping tables to support interpretation of transformed identifiers.
+
+## Findings
+
+The project reports a high ARI between the original and transformed cluster assignments, indicating that the selected transformations retained much of the clustering structure in this synthetic experiment.
+
+The identified profiles were interpreted as:
+- Career progression
+- Underperformance
+- Retirement
+
+The ARI is a measure of similarity between cluster assignments; it is not, by itself, proof that a dataset is anonymous or that re-identification risk has been eliminated.
+
+## Technology stack
+
+- Python and pandas
+- scikit-learn (K-Means and Adjusted Rand Index)
+- hashlib for pseudonymisation examples
+- Matplotlib for visual analysis
+- Google Colab / Jupyter Notebook
+
+## Repository structure
+
+```text
+.
+├── notebooks/   # End-to-end analysis and experiments
+├── data/        # Synthetic dataset (10,000 records)
+└── docs/        # Project report
 ```
-notebooks/  processo completo
-data/       dataset sintético (10.000 registos)
-docs/       relatório
-```
 
-## Autores
-Débora Jesus · João Coelho
+## Reproducing the analysis
+
+1. Open the notebook in Jupyter or Google Colab.
+2. Run the data-generation and preparation cells.
+3. Execute the baseline clustering.
+4. Apply the privacy transformations.
+5. Run the transformed-data clustering and compare the labels with ARI.
+
+## Scope and limitations
+
+- The dataset is synthetic; findings should not be generalized to real HR populations.
+- Hashing is pseudonymisation, not anonymisation. Identifiers may remain linkable, especially when the input space is small or predictable.
+- A high ARI indicates similar cluster structure, not that every transformation is privacy-preserving.
+- The project is an academic demonstration and is not a production HR decision system.
